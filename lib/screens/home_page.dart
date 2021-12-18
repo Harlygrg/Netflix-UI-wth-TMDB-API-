@@ -18,19 +18,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget text ({required String text,
     FontWeight fontWeight=FontWeight.normal,
-  double fontSize =13,
-  Color color =Colors.white}
+    double fontSize =13,
+    Color color =Colors.white}
 
       ){
     return Text(text,style: TextStyle(fontSize: fontSize,
-      fontWeight: fontWeight,
-      color: color
-        ),);
+        fontWeight: fontWeight,
+        color: color
+    ),);
   }
   Widget iconAndNameColumn({
-  required Icon icon,
+    required Icon icon,
     required String iconText
-}){
+  }){
     return Column(
       children: [
         icon,
@@ -38,8 +38,8 @@ class _HomePageState extends State<HomePage> {
       ],
     );
   }
- late int tabIndex;
-@override
+  late int tabIndex;
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -101,8 +101,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
               flexibleSpace: FlexibleSpaceBar(
-                background:  Image.network("https://www.plumeriamovies.com/"
-                    "wp-content/uploads/2019/11/the-king-Netflix.jpg",fit: BoxFit.cover,)
+                  background:  Image.network("https://www.plumeriamovies.com/"
+                      "wp-content/uploads/2019/11/the-king-Netflix.jpg",fit: BoxFit.cover,)
               ),
             ),
             SliverToBoxAdapter(
@@ -111,14 +111,14 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(left: 10,top: 8,bottom: 8),
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [Colors.black,Colors.black],
-                              begin:Alignment.bottomCenter,
-                              end: Alignment.topCenter,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [Colors.black,Colors.black],
+                          begin:Alignment.bottomCenter,
+                          end: Alignment.topCenter,
 
-                          )
-                      ),
+                        )
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -166,22 +166,22 @@ class _HomePageState extends State<HomePage> {
                           //width: 100,
                           height: 150,
                           child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
                               itemCount: 10,
                               itemBuilder: (context,index){
-                            return Container(
-                              padding: EdgeInsets.all(5),
-                              width: 110,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25)
-                              ),
-                              child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                                  child: Image.network("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images"
-                                      "/got-1618347198.jpeg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",fit: BoxFit.cover,)),
-                            );
-                          }
+                                return Container(
+                                  padding: EdgeInsets.all(5),
+                                  width: 110,
+                                  height: 150,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25)
+                                  ),
+                                  child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                                      child: Image.network("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images"
+                                          "/got-1618347198.jpeg?crop=0.502xw:1.00xh;0.250xw,0&resize=640:*",fit: BoxFit.cover,)),
+                                );
+                              }
                           ),
                         ),
                       ],
@@ -193,35 +193,36 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-      //   bottomNavigationBar: SizedBox(
-      //     child: BottomNavigationBar(
-      //       onTap: (index){
-      //         setState(() {
-      //
-      //         });
-      //       },
-      //       items: const <BottomNavigationBarItem>[
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.call),
-      //           label: 'Calls',
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.camera),
-      //           label: 'Camera',
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.chat),
-      //           label: 'Chats',
-      //         ),
-      //         BottomNavigationBarItem(
-      //           icon: Icon(Icons.chat),
-      //           label: 'Chats',
-      //         ),
-      //       ],
-      // ),
-      //   )
+        //   bottomNavigationBar: SizedBox(
+        //     child: BottomNavigationBar(
+        //       onTap: (index){
+        //         setState(() {
+        //
+        //         });
+        //       },
+        //       items: const <BottomNavigationBarItem>[
+        //         BottomNavigationBarItem(
+        //           icon: Icon(Icons.call),
+        //           label: 'Calls',
+        //         ),
+        //         BottomNavigationBarItem(
+        //           icon: Icon(Icons.camera),
+        //           label: 'Camera',
+        //         ),
+        //         BottomNavigationBarItem(
+        //           icon: Icon(Icons.chat),
+        //           label: 'Chats',
+        //         ),
+        //         BottomNavigationBarItem(
+        //           icon: Icon(Icons.chat),
+        //           label: 'Chats',
+        //         ),
+        //       ],
+        // ),
+        //   )
       ),
     );
   }
 
 }
+
