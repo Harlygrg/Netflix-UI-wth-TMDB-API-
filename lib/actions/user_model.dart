@@ -3,7 +3,10 @@
 //     final userModel = userModelFromJson(jsonString);
 
 import 'dart:convert';
-
+const  String apiUrl ="https://api.themoviedb.org/3/movie/top_rated?api_"
+    "key=b691875b6959a2995d4d8bbb9e13c8be&language=en-US&page=1 ";
+const  apiUrl5 ='https://api.themoviedb.org/3/movie/popular?api_key=b691875b6959a2995d4d8bbb9e13c8be&language=en-US&page=1';
+const   apiUrl4 ="https://api.themoviedb.org/3/movie/upcoming?api_key=b691875b6959a2995d4d8bbb9e13c8be&language=en-US&page=1";
 UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
 String userModelToJson(UserModel data) => json.encode(data.toJson());
