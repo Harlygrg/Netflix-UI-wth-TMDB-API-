@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/actions/user_model.dart';
 import 'package:netflix_clone/actions/http_service.dart';
-import 'package:netflix_clone/screens/coming_soon.dart';
+import 'package:netflix_clone/screens/details_page.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

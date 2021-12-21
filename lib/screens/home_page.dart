@@ -6,9 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
+import 'package:netflix_clone/actions/refactored_widgets.dart';
 import 'package:netflix_clone/actions/user_model.dart';
 import 'package:netflix_clone/actions/http_service.dart';
-import 'package:netflix_clone/screens/coming_soon.dart';
+import 'package:netflix_clone/screens/details_page.dart';
 import 'package:netflix_clone/screens/search_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,38 +20,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<UserModel> createData({required String apiUrlString}) async {
-    var apiResponse = await http.get(
-      Uri.parse(apiUrlString),
-    );
-    if (apiResponse.statusCode == 200) {
-      final result = jsonDecode(apiResponse.body);
-      return UserModel.fromJson(result);
-    } else {
-      throw Exception("Failed to load movies image");
-    }
-  }
 
-  Widget text(
-      {required String text,
-      FontWeight fontWeight = FontWeight.normal,
-      double fontSize = 13,
-      Color color = Colors.white}) {
-    return Text(
-      text,
-      style:
-          TextStyle(fontSize: fontSize, fontWeight: fontWeight, color: color),
-    );
-  }
+  API_Manager _api_manager = API_Manager();
 
-  Widget iconAndNameColumn({required Icon icon, required String iconText}) {
-    return Column(
-      children: [
-        icon,
-        text(text: iconText, fontSize: 12, color: Colors.white),
-      ],
-    );
-  }
 
   late int tabIndex;
 
@@ -99,41 +71,12 @@ class _HomePageState extends State<HomePage> {
                   scale: .20,
                 ),
                 actions: [
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          //showSearch(context: context, delegate: SearchMovies());
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SearchScreen()));
-                        },
-                        icon: const Icon(Icons.search,
-                            size: 26, color: Colors.white),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(3),
-                          child: Image.network(
-                            "https://encrypted-"
-                            "tbn0.gstatic.com/images?q=tbn:"
-                            "ANd9GcQa6mnkESGGXpL32uVzQNDLcs"
-                            "AidQyxUkjADA&usqp=CAU",
-                            scale: 9,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                    ],
-                  ),
+                  appbarActionsRow(onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen()));
+                  }),
                 ],
                 flexibleSpace: FlexibleSpaceBar(
                     background: SizedBox(
@@ -246,8 +189,8 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       width: double.infinity,
                       height: 150,
-                      child: FutureBuilder(
-                        future: createData(apiUrlString: apiUrl),
+                      child: FutureBuilder<UserModel>(
+                        future: _api_manager.apiDatas(apiUrlString: apiUrl),
                         builder: (BuildContext context,
                             AsyncSnapshot<UserModel> snapshot) {
                           if (snapshot.hasData) {
@@ -304,7 +247,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 150,
                       child: FutureBuilder(
-                        future: createData(apiUrlString: apiUrl4),
+                        future: _api_manager.apiDatas(apiUrlString: apiUrl4),
                         builder: (BuildContext context,
                             AsyncSnapshot<UserModel> snapshot) {
                           if (snapshot.hasData) {
@@ -358,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 150,
                       child: FutureBuilder(
-                        future: createData(apiUrlString: apiUrl5),
+                        future: _api_manager.apiDatas(apiUrlString: apiUrl5),
                         builder: (BuildContext context,
                             AsyncSnapshot<UserModel> snapshot) {
                           if (snapshot.hasData) {
@@ -414,36 +357,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          bottomNavigationBar: SizedBox(
-            child: BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              backgroundColor: Colors.black,
-              unselectedItemColor: Colors.white60,
-              selectedItemColor: Colors.white,
-              showUnselectedLabels: true,
-              onTap: (index) {
-                setState(() {});
-              },
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.video_library_outlined),
-                  label: 'Coming Soon',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.sentiment_very_satisfied_outlined),
-                  label: 'Fast Laughs',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.download_for_offline_outlined),
-                  label: 'Downloads',
-                ),
-              ],
-            ),
-          )),
+      ),
     );
   }
 

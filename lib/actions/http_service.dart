@@ -30,4 +30,19 @@ class API_Manager {
       throw Exception("Failed to load movies image");
     }
   }
+
+  Future<UserModel> apiDatas({required String apiUrlString}) async {
+    var apiResponse = await http.get(
+      Uri.parse(apiUrlString),
+    );
+    if (apiResponse.statusCode == 200) {
+      final result = jsonDecode(apiResponse.body);
+      return UserModel.fromJson(result);
+    } else {
+      throw Exception("Failed to load movies image");
+    }
+  }
+
+
+
 }
