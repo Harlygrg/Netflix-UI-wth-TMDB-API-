@@ -1,7 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -27,7 +25,6 @@ class _HomePageState extends State<HomePage> {
 
   late int tabIndex;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,15 +48,22 @@ class _HomePageState extends State<HomePage> {
                       text(text: "TV shows"),
                       text(text: "Movies"),
                       SizedBox(
-                        child: Row(
-                          children: [
-                            text(text: "Categories"),
-                            const Icon(
-                              Icons.arrow_drop_down,
-                              size: 25,
-                              color: Colors.white,
-                            ),
-                          ],
+                        child: TextButton(
+                          onPressed: (){
+                            setState(() {
+                              _onCategoryPressed();
+                            });
+                          },
+                          child: Row(
+                            children: [
+                              text(text: "Categories"),
+                              const Icon(
+                                Icons.arrow_drop_down,
+                                size: 25,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -206,13 +210,6 @@ class _HomePageState extends State<HomePage> {
                                 final movie = snapshot.data!.results![index];
                                 return GestureDetector(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => ComingSoon(
-                                    //               movie: movie,
-                                    //               index: index,
-                                    //             )));
                                   setState(() {
                                     _onButtonPressed(index: index, movie: movie);
                                   });
@@ -227,10 +224,11 @@ class _HomePageState extends State<HomePage> {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          child: Image.network(
-                                            "https://www.themoviedb.org/t/p/original${movie.posterPath ?? movie.backdropPath}",
-                                            fit: BoxFit.cover,
-                                          ))),
+                                          child: FadeInImage.assetNetwork(
+                                              placeholder: "imageAssets/loadingImage.PNG",
+                                              image:  "https://www.themoviedb.org/t/p/original${movie.posterPath ?? movie.backdropPath}",
+                                            fit: BoxFit.cover, )
+                                      )),
                                 );
                               });
                         } else {
@@ -263,13 +261,6 @@ class _HomePageState extends State<HomePage> {
                                 final movie = snapshot.data!.results![index];
                                 return GestureDetector(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => ComingSoon(
-                                    //               movie: movie,
-                                    //               index: index,
-                                    //             )));
                                     setState(() {
                                       _onButtonPressed(index: index, movie: movie);
                                     });
@@ -284,10 +275,11 @@ class _HomePageState extends State<HomePage> {
                                       child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          child: Image.network(
-                                            "https://www.themoviedb.org/t/p/original${movie.posterPath ?? movie.backdropPath}",
-                                            fit: BoxFit.cover,
-                                          ))),
+                                          child: FadeInImage.assetNetwork(
+                                              placeholder: "imageAssets/loadingImage.PNG",
+                                              image:"https://www.themoviedb.org/t/p/original${movie.posterPath ?? movie.backdropPath}",
+                                              fit: BoxFit.cover,),
+                                      )),
                                 );
                               });
                         } else {
@@ -302,7 +294,7 @@ class _HomePageState extends State<HomePage> {
                     height: 10,
                   ),
                   text(
-                      text: "Popular",
+                      text: "Top Ten",
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                   SizedBox(
@@ -321,13 +313,6 @@ class _HomePageState extends State<HomePage> {
                                 final movie = snapshot.data!.results![index];
                                 return GestureDetector(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) => ComingSoon(
-                                    //               movie: movie,
-                                    //               index: index,
-                                    //             )));
                                     setState(() {
                                       _onButtonPressed(index: index, movie: movie);
                                     });
@@ -363,7 +348,7 @@ class _HomePageState extends State<HomePage> {
                                                   child:
                                                   FadeInImage.assetNetwork(
                                                     placeholder:
-                                                    "imageAssets/anjamPathira.PNG",
+                                                    "imageAssets/loadingImage.PNG",
                                                     image:
                                                     "https://www.themoviedb.org/t/p/original${movie.posterPath ?? movie.backdropPath}",
                                                     fit: BoxFit.cover,
@@ -395,7 +380,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-            ),
+            )
           ],
         ),
     );
@@ -411,7 +396,7 @@ void _onButtonPressed({required int index,required var movie}){
         context: context, builder: (context){
       return Container(
         width: MediaQuery.of(context).size.width,
-        height: 200,
+        height: 250,
        decoration: BoxDecoration(
          borderRadius: BorderRadius.only(
            topLeft: const Radius.circular(10),
@@ -422,6 +407,7 @@ void _onButtonPressed({required int index,required var movie}){
           height: 142,
           width: 400,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Row(
                 children: [
@@ -479,7 +465,16 @@ void _onButtonPressed({required int index,required var movie}){
                     iconAndNameColumn(icon: Icon(Icons.play_arrow_outlined,color: Colors.white,), iconText: "Preview"),
                   ],
                 ),
-              )
+              ),
+              TextButton(onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ComingSoon(
+                          movie: movie,
+                          index: index,
+                        )));
+              }, child: Text("More Details",style: TextStyle(color: Colors.white),))
             ],
           ),
         ),
@@ -487,6 +482,49 @@ void _onButtonPressed({required int index,required var movie}){
 
     });
 }
+  void _onCategoryPressed(){
+    showModalBottomSheet
+      (backgroundColor: Colors.black.withOpacity(.5),
+        isScrollControlled: true,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(10)
+
+            )
+        ),
+        context: context, builder: (context){
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.black.withOpacity(.2),
+              body:Column(crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: ListView.builder(
+                      itemCount: language.length,
+                        itemBuilder: (context,index){
+                      return Padding(padding: EdgeInsets.only(top: 15,bottom:15),
+                      child: Center(child:index==0? text(text:language[index],fontSize: 17,fontWeight: FontWeight.bold )
+                      :text(text:language[index],fontSize: 17 ),));
+                    }),
+                ),
+                ],
+              ) ,
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.close_outlined,color: Colors.black,
+                ),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+          );
+
+        });
+  }
   Widget gesture({
     required Function() onTap,
     required String imageUrl,

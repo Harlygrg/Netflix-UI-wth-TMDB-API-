@@ -90,3 +90,7 @@ Widget elevatedButton({
       )
   );
 }
+
+  const String downlodDescriptn ="We'll download a personalised selection of movies and shows for you, so there is something to watch on your phone";
+List<String> language =["Home","Available for Download","Holidays","Hindi",
+  "Tamil","Punjabi","Malayalam","English","Spanish","Marathi","French","Arabic","Telugu","Mubasheer","Harly","Aslam","Akshay"];

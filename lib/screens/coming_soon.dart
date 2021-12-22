@@ -44,7 +44,7 @@ class ComingSoon extends StatelessWidget {
                           SizedBox(height: MediaQuery.of(context).size.height/3,
                             width:MediaQuery.of(context).size.width,
                             child: Image.network( "https://www.themoviedb.org/t/p/original"
-                                "${valueFromApi.posterPath ?? valueFromApi.backdropPath}",fit: BoxFit.fill,),
+                                "${valueFromApi.posterPath ?? valueFromApi.backdropPath}",fit: BoxFit.cover,),
                           ),
                           divider(height: 10, width: 0),
                          LinearProgressIndicator(
@@ -55,7 +55,7 @@ class ComingSoon extends StatelessWidget {
 
                          ),
                           divider(height: 5, width: 0),
-                          
+
                           ListTile(
                             leading:SizedBox(height: MediaQuery.of(context).size.height/15,
                               width:150,

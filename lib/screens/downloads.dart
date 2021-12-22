@@ -4,6 +4,7 @@ import 'package:netflix_clone/actions/http_service.dart';
 import 'package:netflix_clone/actions/refactored_widgets.dart';
 import 'package:netflix_clone/actions/user_model.dart';
 
+
 class Downloads extends StatelessWidget {
    Downloads({Key? key}) : super(key: key);
 
@@ -61,11 +62,13 @@ class Downloads extends StatelessWidget {
               return !snapshot.hasData ? Center(child: CircularProgressIndicator(),):
                 Expanded(
                   child: ListView.builder(
-                    itemCount: snapshot.data!.results!.length,
+                    itemCount:1,
+                      shrinkWrap: true,
+                      physics: ScrollPhysics(),
                       itemBuilder: (context,index){
                       var _apiDatas =snapshot.data!.results![index];
                         return ListTile(
-                          leading: SizedBox(height: MediaQuery.of(context).size.height*.3,
+                          leading: SizedBox(height: MediaQuery.of(context).size.height*.4,
                             width:MediaQuery.of(context).size.width*.3,
                             child: Image.network( "https://www.themoviedb.org/t/p/original"
                                 "${_apiDatas.posterPath ?? _apiDatas.backdropPath}",fit: BoxFit.fill,),
@@ -76,7 +79,88 @@ class Downloads extends StatelessWidget {
                         );
                       }),
                 );
-            })
+            }),
+            Container(
+            height:MediaQuery.of(context).size.height/1.65,
+              //color: Colors.amber,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Divider(color: Colors.grey,),
+                    divider(height: 5, width: 0),
+                    text(text:"Introducing Downloads for you",fontSize: 16,fontWeight: FontWeight.bold ),
+                    divider(height: 10, width: 0),
+                    text(text:downlodDescriptn,fontSize: 13,color: Colors.grey ),
+                    Center(
+                      child: Container(
+                        width: 250,height: 250,
+                        decoration: BoxDecoration(
+                          color: Color(0xff303030),
+                          borderRadius: BorderRadius.circular(125)
+                        ),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Positioned(
+                                top: 55,left: 0,
+                                child: RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(329 / 360),
+                                  child: SizedBox(
+                                    height: 165,width: 140,
+                                    child: Image.asset("imageAssets/minnal.PNG"),
+                                  ),
+                                )),
+                            Positioned(
+                              top: 65,left: 120,
+                                child: RotationTransition(
+                                  turns: new AlwaysStoppedAnimation(391 / 360),
+                                  child: SizedBox(
+                                    height: 165,width: 140,
+                                    child: Image.asset("imageAssets/puli.PNG"),
+                                  ),
+                                )),
+                            Positioned(left: 55,top: 35,
+                                child: SizedBox(
+                                  height: 190,width: 140,
+                                  child: Image.asset("imageAssets/anjamPathira.PNG"),
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    divider(height: 5, width: 0),
+                    SizedBox(width: MediaQuery.of(context).size.width*.95,
+                      child: ElevatedButton(onPressed: (){},
+                          child: text(text: "SET UP",fontSize: 13),
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          primary: Colors.blue
+                        )
+                      ),
+                    ),
+                    divider(height: 5, width: 0),
+                    Center(
+                      child: SizedBox(width: MediaQuery.of(context).size.width*.65,
+                        child: ElevatedButton(onPressed: (){},
+                            child: text(text: "Find more to download",fontSize: 13),
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                primary: Color(0xff303030)
+                            )
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
