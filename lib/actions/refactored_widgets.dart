@@ -44,7 +44,7 @@ Widget divider({required double height,required double width}){
   return SizedBox(height: height,width: width,);
 }
 
-Widget text(
+ text(
     {required String text,
       FontWeight fontWeight = FontWeight.normal,
       double fontSize = 13,
@@ -64,5 +64,29 @@ Widget iconAndNameColumn({required Icon icon, required String iconText,
       icon,
       text(text: iconText, fontSize: fontSize, color: textColor),
     ],
+  );
+}
+Widget elevatedButton({
+  required Icon icon,
+  required String texts,
+  Color buttonColor = Colors.white,
+  Color textColor = Colors.black,
+}){
+  return ElevatedButton(onPressed: (){},
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
+        primary: buttonColor,// background
+        onPrimary: buttonColor, // foreground
+      ),
+      child:
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          icon,
+          text(color: textColor,text: texts,fontWeight: FontWeight.bold,)
+        ],
+      )
   );
 }

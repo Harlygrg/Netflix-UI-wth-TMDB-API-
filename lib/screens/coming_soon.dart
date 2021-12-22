@@ -58,7 +58,7 @@ class ComingSoon extends StatelessWidget {
                           
                           ListTile(
                             leading:SizedBox(height: MediaQuery.of(context).size.height/15,
-                              width:50,
+                              width:150,
                               child: Image.network( "https://www.themoviedb.org/t/p/original"
                                   "${valueFromApi.posterPath ?? valueFromApi.backdropPath}",fit: BoxFit.fill,)
                             ),

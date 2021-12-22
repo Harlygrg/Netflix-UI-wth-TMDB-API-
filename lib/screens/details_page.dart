@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:netflix_clone/actions/refactored_widgets.dart';
 import 'package:netflix_clone/screens/home_page.dart';
 import 'package:netflix_clone/screens/details_page.dart';
 import 'package:netflix_clone/screens/downloads.dart';
@@ -137,28 +138,5 @@ class _ComingSoonState extends State<ComingSoon> {
       ),
     );
   }
-  Widget elevatedButton({
-  required Icon icon,
-    required String texts,
-    Color buttonColor = Colors.white,
-    Color textColor = Colors.black,
-}){
-    return ElevatedButton(onPressed: (){},
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5),
-          ),
-          primary: buttonColor,// background
-          onPrimary: buttonColor, // foreground
-        ),
-        child:
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon,
-            text(color: textColor,text: texts,fontWeight: FontWeight.bold,)
-          ],
-        )
-    );
-  }
+
 }
